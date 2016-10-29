@@ -29,8 +29,8 @@ type family BoolItem a where
 class IsBool a where
   toBool :: a -> BoolItem a
 
-instance {-# OVERLAPPABLE #-} IsBool (BoolLike a) where
+instance IsBool (BoolLike a) where
   toBool = id
 
-instance (BoolItem a ~ BoolLike a) => IsBool a where
+instance {-# OVERLAPPABLE #-} (BoolItem a ~ BoolLike a) => IsBool a where
   toBool = toBoolLike
